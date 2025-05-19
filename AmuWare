@@ -1,3 +1,50 @@
+local key = "FeaRunsYou"
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "KeyCheckGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.Parent = screenGui
+
+-- Create TextBox for input
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0, 280, 0, 50)
+textBox.Position = UDim2.new(0, 10, 0, 40)
+textBox.PlaceholderText = "Enter Key Here"
+textBox.Text = ""
+textBox.ClearTextOnFocus = true
+textBox.Parent = frame
+
+-- Create Button to submit
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 280, 0, 40)
+button.Position = UDim2.new(0, 10, 0, 100)
+button.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+button.Text = "Submit"
+button.Parent = frame
+
+local function correctKeyEntered()
+    screenGui:Destroy() -- Remove the UI
+    -- Place your main script code here or call a function to continue
+    print("Key accepted. Script running...")
+    -- YOUR MAIN SCRIPT STARTS HERE
+end
+
+button.MouseButton1Click:Connect(function()
+    if textBox.Text == key then
+        correctKeyEntered()
+    else
+        textBox.Text = ""
+        textBox.PlaceholderText = "Incorrect Key! Try again."
+    end
+end)
 
 
 
