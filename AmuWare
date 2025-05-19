@@ -37,24 +37,10 @@ button.TextSize = 24
 button.BorderSizePixel = 0
 button.Parent = frame
 
+-- Main script function - put your entire main code here inside this function
 local function mainScript()
     screenGui:Destroy()
-    -- YOUR SCRIPT CODE STARTS HERE
-    print("Correct key entered! Running the script...")
-end
-
-button.MouseButton1Click:Connect(function()
-    if textBox.Text == key then
-        mainScript()
-    else
-        textBox.Text = ""
-        textBox.PlaceholderText = "Incorrect Key, Try Again"
-    end
-end)
-
-
-
-
+    -- Your actual script starts here
 local TweenService = game:GetService("TweenService")
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -853,4 +839,24 @@ local function playVoidShootSound()
     sound.Parent = root
     sound:Destroy() -- Plays because of PlayOnRemove
 end
+    print("Correct key! Script is running...")
+    -- For example:
+    -- game.Workspace.Part.BrickColor = BrickColor.new("Bright red")
+    -- (replace the above with your real main script)
+end
+
+button.MouseButton1Click:Connect(function()
+    if textBox.Text == key then
+        mainScript()
+    else
+        textBox.Text = ""
+        textBox.PlaceholderText = "Incorrect Key, Try Again"
+    end
+end)
+
+
+
+
+
+
 
