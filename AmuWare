@@ -1,50 +1,57 @@
 local key = "FeaRunsYou"
 
--- Create ScreenGui
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "KeyCheckGui"
 screenGui.ResetOnSpawn = false
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.Parent = playerGui
 
--- Create Frame
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 300, 0, 150)
-frame.Position = UDim2.new(0.5, -150, 0.5, -75)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.Size = UDim2.new(0, 300, 0, 140)
+frame.Position = UDim2.new(0.5, -150, 0.5, -70)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BorderSizePixel = 0
 frame.Parent = screenGui
 
--- Create TextBox for input
 local textBox = Instance.new("TextBox")
 textBox.Size = UDim2.new(0, 280, 0, 50)
-textBox.Position = UDim2.new(0, 10, 0, 40)
-textBox.PlaceholderText = "Enter Key Here"
-textBox.Text = ""
+textBox.Position = UDim2.new(0, 10, 0, 20)
+textBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+textBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+textBox.PlaceholderText = "Enter Key"
 textBox.ClearTextOnFocus = true
+textBox.Font = Enum.Font.SourceSans
+textBox.TextSize = 22
 textBox.Parent = frame
 
--- Create Button to submit
 local button = Instance.new("TextButton")
 button.Size = UDim2.new(0, 280, 0, 40)
-button.Position = UDim2.new(0, 10, 0, 100)
-button.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
+button.Position = UDim2.new(0, 10, 0, 80)
+button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+button.TextColor3 = Color3.fromRGB(0, 0, 0)
 button.Text = "Submit"
+button.Font = Enum.Font.SourceSansBold
+button.TextSize = 24
+button.BorderSizePixel = 0
 button.Parent = frame
 
-local function correctKeyEntered()
-    screenGui:Destroy() -- Remove the UI
-    -- Place your main script code here or call a function to continue
-    print("Key accepted. Script running...")
-    -- YOUR MAIN SCRIPT STARTS HERE
+local function mainScript()
+    screenGui:Destroy()
+    -- YOUR SCRIPT CODE STARTS HERE
+    print("Correct key entered! Running the script...")
 end
 
 button.MouseButton1Click:Connect(function()
     if textBox.Text == key then
-        correctKeyEntered()
+        mainScript()
     else
         textBox.Text = ""
-        textBox.PlaceholderText = "Incorrect Key! Try again."
+        textBox.PlaceholderText = "Incorrect Key, Try Again"
     end
 end)
+
 
 
 
